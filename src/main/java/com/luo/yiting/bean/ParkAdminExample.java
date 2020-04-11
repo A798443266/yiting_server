@@ -443,6 +443,66 @@ public class ParkAdminExample {
             addCriterion("pic not between", value1, value2, "pic");
             return (Criteria) this;
         }
+
+        public Criteria andParkinglotidIsNull() {
+            addCriterion("parkingLotId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParkinglotidIsNotNull() {
+            addCriterion("parkingLotId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParkinglotidEqualTo(Integer value) {
+            addCriterion("parkingLotId =", value, "parkinglotid");
+            return (Criteria) this;
+        }
+
+        public Criteria andParkinglotidNotEqualTo(Integer value) {
+            addCriterion("parkingLotId <>", value, "parkinglotid");
+            return (Criteria) this;
+        }
+
+        public Criteria andParkinglotidGreaterThan(Integer value) {
+            addCriterion("parkingLotId >", value, "parkinglotid");
+            return (Criteria) this;
+        }
+
+        public Criteria andParkinglotidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("parkingLotId >=", value, "parkinglotid");
+            return (Criteria) this;
+        }
+
+        public Criteria andParkinglotidLessThan(Integer value) {
+            addCriterion("parkingLotId <", value, "parkinglotid");
+            return (Criteria) this;
+        }
+
+        public Criteria andParkinglotidLessThanOrEqualTo(Integer value) {
+            addCriterion("parkingLotId <=", value, "parkinglotid");
+            return (Criteria) this;
+        }
+
+        public Criteria andParkinglotidIn(List<Integer> values) {
+            addCriterion("parkingLotId in", values, "parkinglotid");
+            return (Criteria) this;
+        }
+
+        public Criteria andParkinglotidNotIn(List<Integer> values) {
+            addCriterion("parkingLotId not in", values, "parkinglotid");
+            return (Criteria) this;
+        }
+
+        public Criteria andParkinglotidBetween(Integer value1, Integer value2) {
+            addCriterion("parkingLotId between", value1, value2, "parkinglotid");
+            return (Criteria) this;
+        }
+
+        public Criteria andParkinglotidNotBetween(Integer value1, Integer value2) {
+            addCriterion("parkingLotId not between", value1, value2, "parkinglotid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

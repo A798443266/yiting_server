@@ -31,4 +31,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User selectByPhone(String phone);
+
+    String selectPasswordById(Integer id);
 }

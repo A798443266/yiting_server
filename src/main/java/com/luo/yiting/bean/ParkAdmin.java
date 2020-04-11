@@ -11,6 +11,8 @@ public class ParkAdmin {
 
     private String pic;
 
+    private Integer parkinglotid;
+
     public Integer getId() {
         return id;
     }
@@ -49,5 +51,13 @@ public class ParkAdmin {
 
     public void setPic(String pic) {
         this.pic = pic == null ? null : pic.trim();
+    }
+
+    public Integer getParkinglotid() {
+        return parkinglotid;
+    }
+
+    public void setParkinglotid(Integer parkinglotid) {
+        this.parkinglotid = parkinglotid;
     }
 }

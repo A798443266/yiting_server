@@ -1,11 +1,15 @@
 package com.luo.yiting.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 public class Car {
     private Integer id;
 
     private String licensePlate;
 
-    private Integer newEnergy;
+    private Integer status;
 
     private String frameNumber;
 
@@ -14,6 +18,12 @@ public class Car {
     private String pic;
 
     private Integer userid;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createtime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date passtime;
 
     public Integer getId() {
         return id;
@@ -31,12 +41,12 @@ public class Car {
         this.licensePlate = licensePlate == null ? null : licensePlate.trim();
     }
 
-    public Integer getNewEnergy() {
-        return newEnergy;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setNewEnergy(Integer newEnergy) {
-        this.newEnergy = newEnergy;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getFrameNumber() {
@@ -69,5 +79,21 @@ public class Car {
 
     public void setUserid(Integer userid) {
         this.userid = userid;
+    }
+
+    public Date getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
+
+    public Date getPasstime() {
+        return passtime;
+    }
+
+    public void setPasstime(Date passtime) {
+        this.passtime = passtime;
     }
 }

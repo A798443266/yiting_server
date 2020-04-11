@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.luo.yiting.mapper.CarMapper" >
-  <resultMap id="BaseResultMap" type="com.luo.yiting.bean.Car" >
+<mapper namespace="com.luo.yiting.mapper.InformationMapper" >
+  <resultMap id="BaseResultMap" type="com.luo.yiting.bean.Information" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="license_plate" property="licensePlate" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="frame_number" property="frameNumber" jdbcType="VARCHAR" />
-    <result column="engine_number" property="engineNumber" jdbcType="VARCHAR" />
-    <result column="pic" property="pic" jdbcType="VARCHAR" />
-    <result column="userId" property="userid" jdbcType="INTEGER" />
     <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="passTime" property="passtime" jdbcType="TIMESTAMP" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="subTitle" property="subtitle" jdbcType="VARCHAR" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="likes" property="likes" jdbcType="INTEGER" />
+    <result column="looks" property="looks" jdbcType="INTEGER" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,16 +71,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, license_plate, status, frame_number, engine_number, pic, userId, createTime, 
-    passTime
+    id, createTime, title, subTitle, pic, likes, looks, source, description
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luo.yiting.bean.CarExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luo.yiting.bean.InformationExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from car
+    from information
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,125 +90,125 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from car
+    from information
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from car
+    delete from information
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.luo.yiting.bean.CarExample" >
-    delete from car
+  <delete id="deleteByExample" parameterType="com.luo.yiting.bean.InformationExample" >
+    delete from information
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.luo.yiting.bean.Car" >
-    insert into car (id, license_plate, status, 
-      frame_number, engine_number, pic, 
-      userId, createTime, passTime
+  <insert id="insert" parameterType="com.luo.yiting.bean.Information" >
+    insert into information (id, createTime, title, 
+      subTitle, pic, likes, 
+      looks, source, description
       )
-    values (#{id,jdbcType=INTEGER}, #{licensePlate,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{frameNumber,jdbcType=VARCHAR}, #{engineNumber,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
-      #{userid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{passtime,jdbcType=TIMESTAMP}
+    values (#{id,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, 
+      #{subtitle,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{likes,jdbcType=INTEGER}, 
+      #{looks,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.luo.yiting.bean.Car" >
-    insert into car
+  <insert id="insertSelective" parameterType="com.luo.yiting.bean.Information" >
+    insert into information
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="licensePlate != null" >
-        license_plate,
+      <if test="createtime != null" >
+        createTime,
       </if>
-      <if test="status != null" >
-        status,
+      <if test="title != null" >
+        title,
       </if>
-      <if test="frameNumber != null" >
-        frame_number,
-      </if>
-      <if test="engineNumber != null" >
-        engine_number,
+      <if test="subtitle != null" >
+        subTitle,
       </if>
       <if test="pic != null" >
         pic,
       </if>
-      <if test="userid != null" >
-        userId,
+      <if test="likes != null" >
+        likes,
       </if>
-      <if test="createtime != null" >
-        createTime,
+      <if test="looks != null" >
+        looks,
       </if>
-      <if test="passtime != null" >
-        passTime,
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="description != null" >
+        description,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="licensePlate != null" >
-        #{licensePlate,jdbcType=VARCHAR},
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
       </if>
-      <if test="frameNumber != null" >
-        #{frameNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="engineNumber != null" >
-        #{engineNumber,jdbcType=VARCHAR},
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
       </if>
       <if test="pic != null" >
         #{pic,jdbcType=VARCHAR},
       </if>
-      <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
+      <if test="likes != null" >
+        #{likes,jdbcType=INTEGER},
       </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="looks != null" >
+        #{looks,jdbcType=INTEGER},
       </if>
-      <if test="passtime != null" >
-        #{passtime,jdbcType=TIMESTAMP},
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.luo.yiting.bean.CarExample" resultType="java.lang.Integer" >
-    select count(*) from car
+  <select id="countByExample" parameterType="com.luo.yiting.bean.InformationExample" resultType="java.lang.Integer" >
+    select count(*) from information
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update car
+    update information
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.licensePlate != null" >
-        license_plate = #{record.licensePlate,jdbcType=VARCHAR},
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=INTEGER},
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.frameNumber != null" >
-        frame_number = #{record.frameNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="record.engineNumber != null" >
-        engine_number = #{record.engineNumber,jdbcType=VARCHAR},
+      <if test="record.subtitle != null" >
+        subTitle = #{record.subtitle,jdbcType=VARCHAR},
       </if>
       <if test="record.pic != null" >
         pic = #{record.pic,jdbcType=VARCHAR},
       </if>
-      <if test="record.userid != null" >
-        userId = #{record.userid,jdbcType=INTEGER},
+      <if test="record.likes != null" >
+        likes = #{record.likes,jdbcType=INTEGER},
       </if>
-      <if test="record.createtime != null" >
-        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      <if test="record.looks != null" >
+        looks = #{record.looks,jdbcType=INTEGER},
       </if>
-      <if test="record.passtime != null" >
-        passTime = #{record.passtime,jdbcType=TIMESTAMP},
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -217,60 +216,60 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update car
+    update information
     set id = #{record.id,jdbcType=INTEGER},
-      license_plate = #{record.licensePlate,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER},
-      frame_number = #{record.frameNumber,jdbcType=VARCHAR},
-      engine_number = #{record.engineNumber,jdbcType=VARCHAR},
-      pic = #{record.pic,jdbcType=VARCHAR},
-      userId = #{record.userid,jdbcType=INTEGER},
       createTime = #{record.createtime,jdbcType=TIMESTAMP},
-      passTime = #{record.passtime,jdbcType=TIMESTAMP}
+      title = #{record.title,jdbcType=VARCHAR},
+      subTitle = #{record.subtitle,jdbcType=VARCHAR},
+      pic = #{record.pic,jdbcType=VARCHAR},
+      likes = #{record.likes,jdbcType=INTEGER},
+      looks = #{record.looks,jdbcType=INTEGER},
+      source = #{record.source,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.luo.yiting.bean.Car" >
-    update car
+  <update id="updateByPrimaryKeySelective" parameterType="com.luo.yiting.bean.Information" >
+    update information
     <set >
-      <if test="licensePlate != null" >
-        license_plate = #{licensePlate,jdbcType=VARCHAR},
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="frameNumber != null" >
-        frame_number = #{frameNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="engineNumber != null" >
-        engine_number = #{engineNumber,jdbcType=VARCHAR},
+      <if test="subtitle != null" >
+        subTitle = #{subtitle,jdbcType=VARCHAR},
       </if>
       <if test="pic != null" >
         pic = #{pic,jdbcType=VARCHAR},
       </if>
-      <if test="userid != null" >
-        userId = #{userid,jdbcType=INTEGER},
+      <if test="likes != null" >
+        likes = #{likes,jdbcType=INTEGER},
       </if>
-      <if test="createtime != null" >
-        createTime = #{createtime,jdbcType=TIMESTAMP},
+      <if test="looks != null" >
+        looks = #{looks,jdbcType=INTEGER},
       </if>
-      <if test="passtime != null" >
-        passTime = #{passtime,jdbcType=TIMESTAMP},
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.luo.yiting.bean.Car" >
-    update car
-    set license_plate = #{licensePlate,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      frame_number = #{frameNumber,jdbcType=VARCHAR},
-      engine_number = #{engineNumber,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.luo.yiting.bean.Information" >
+    update information
+    set createTime = #{createtime,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      subTitle = #{subtitle,jdbcType=VARCHAR},
       pic = #{pic,jdbcType=VARCHAR},
-      userId = #{userid,jdbcType=INTEGER},
-      createTime = #{createtime,jdbcType=TIMESTAMP},
-      passTime = #{passtime,jdbcType=TIMESTAMP}
+      likes = #{likes,jdbcType=INTEGER},
+      looks = #{looks,jdbcType=INTEGER},
+      source = #{source,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -244,4 +244,8 @@
   <select id="selectByPhone" parameterType="string" resultMap="BaseResultMap">
     select * from user where phone=#{value}
   </select>
+
+  <select id="selectPasswordById" parameterType="int" resultType="string">
+    select password from user where id=#{value}
+  </select>
 </mapper>
