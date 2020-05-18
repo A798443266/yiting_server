@@ -1,6 +1,5 @@
 package com.luo.yiting.service;
 
-import com.luo.yiting.bean.Information;
 import com.luo.yiting.bean.User;
 import com.luo.yiting.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +38,9 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userMapper.selectByExample(null);
+    }
+
+    public int delUserById(Integer id) {
+       return userMapper.deleteByPrimaryKey(id);
     }
 }

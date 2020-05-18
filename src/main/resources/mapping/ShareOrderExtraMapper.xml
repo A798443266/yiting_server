@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luo.yiting.mapper.ShareOrderExtraMapper" >
+  <resultMap id="BaseResultMap" type="com.luo.yiting.bean.ShareOrderExtra" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="booker_up_pic" property="bookerUpPic" jdbcType="VARCHAR" />
+    <result column="announcer_up_pic" property="announcerUpPic" jdbcType="VARCHAR" />
+    <result column="orderId" property="orderid" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="booker_time" property="bookerTime" jdbcType="TIMESTAMP" />
+    <result column="announcer_time" property="announcerTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, booker_up_pic, announcer_up_pic, orderId, remark, booker_time, announcer_time, 
+    status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luo.yiting.bean.ShareOrderExtraExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from share_order_extra
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from share_order_extra
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from share_order_extra
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.luo.yiting.bean.ShareOrderExtraExample" >
+    delete from share_order_extra
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.luo.yiting.bean.ShareOrderExtra" >
+    insert into share_order_extra (id, booker_up_pic, announcer_up_pic, 
+      orderId, remark, booker_time, 
+      announcer_time, status)
+    values (#{id,jdbcType=INTEGER}, #{bookerUpPic,jdbcType=VARCHAR}, #{announcerUpPic,jdbcType=VARCHAR}, 
+      #{orderid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{bookerTime,jdbcType=TIMESTAMP}, 
+      #{announcerTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luo.yiting.bean.ShareOrderExtra" >
+    insert into share_order_extra
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bookerUpPic != null" >
+        booker_up_pic,
+      </if>
+      <if test="announcerUpPic != null" >
+        announcer_up_pic,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="bookerTime != null" >
+        booker_time,
+      </if>
+      <if test="announcerTime != null" >
+        announcer_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bookerUpPic != null" >
+        #{bookerUpPic,jdbcType=VARCHAR},
+      </if>
+      <if test="announcerUpPic != null" >
+        #{announcerUpPic,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="bookerTime != null" >
+        #{bookerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="announcerTime != null" >
+        #{announcerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.luo.yiting.bean.ShareOrderExtraExample" resultType="java.lang.Integer" >
+    select count(*) from share_order_extra
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update share_order_extra
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookerUpPic != null" >
+        booker_up_pic = #{record.bookerUpPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.announcerUpPic != null" >
+        announcer_up_pic = #{record.announcerUpPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderid != null" >
+        orderId = #{record.orderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookerTime != null" >
+        booker_time = #{record.bookerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.announcerTime != null" >
+        announcer_time = #{record.announcerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update share_order_extra
+    set id = #{record.id,jdbcType=INTEGER},
+      booker_up_pic = #{record.bookerUpPic,jdbcType=VARCHAR},
+      announcer_up_pic = #{record.announcerUpPic,jdbcType=VARCHAR},
+      orderId = #{record.orderid,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      booker_time = #{record.bookerTime,jdbcType=TIMESTAMP},
+      announcer_time = #{record.announcerTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luo.yiting.bean.ShareOrderExtra" >
+    update share_order_extra
+    <set >
+      <if test="bookerUpPic != null" >
+        booker_up_pic = #{bookerUpPic,jdbcType=VARCHAR},
+      </if>
+      <if test="announcerUpPic != null" >
+        announcer_up_pic = #{announcerUpPic,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        orderId = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="bookerTime != null" >
+        booker_time = #{bookerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="announcerTime != null" >
+        announcer_time = #{announcerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luo.yiting.bean.ShareOrderExtra" >
+    update share_order_extra
+    set booker_up_pic = #{bookerUpPic,jdbcType=VARCHAR},
+      announcer_up_pic = #{announcerUpPic,jdbcType=VARCHAR},
+      orderId = #{orderid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      booker_time = #{bookerTime,jdbcType=TIMESTAMP},
+      announcer_time = #{announcerTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

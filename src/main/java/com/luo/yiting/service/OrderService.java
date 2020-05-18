@@ -39,6 +39,10 @@ public class OrderService {
         return shareOrderMapper.selectByExample(example);
     }
 
+    public ShareOrder getShareOrderById(Integer id) {
+        return shareOrderMapper.selectByPrimaryKey(id);
+    }
+
     @Transactional(rollbackFor = Exception.class)
     public boolean tuiding(int orderId, int userId) {
         ShareOrder shareOrder = shareOrderMapper.selectByPrimaryKey(orderId);
@@ -48,5 +52,19 @@ public class OrderService {
         user.setBalance(user.getBalance() + shareOrder.getPrice());
         int res2 = userMapper.updateByPrimaryKeySelective(user);
         return res1 > 0 && res2 > 0;
+    }
+
+    public void updateStatusToStart(int id) {
+        ShareOrder shareOrder = new ShareOrder();
+        shareOrder.setId(id);
+        shareOrder.setStatus(1);
+        shareOrderMapper.updateByPrimaryKeySelective(shareOrder);
+    }
+
+    public int updateStatusToEnd(Integer orderId) {
+        ShareOrder shareOrder = new ShareOrder();
+        shareOrder.setId(orderId);
+        shareOrder.setStatus(2);
+        return shareOrderMapper.updateByPrimaryKeySelective(shareOrder);
     }
 }

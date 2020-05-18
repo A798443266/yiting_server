@@ -70,4 +70,13 @@ public class parkAdminController {
         return map;
     }
 
+    @RequestMapping("/getParkAdminInfo")
+    public Map getParkAdminInfo(Integer userId) {
+        Map<String, Object> map = new HashMap<>();
+        ParkAdmin parkAdmin = service.getParkAdminInfoById(userId);
+        map.put("code", 200);
+        map.put("parkAdmin", parkAdmin);
+        return map;
+    }
+
 }

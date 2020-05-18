@@ -40,4 +40,8 @@ public class ParkAdminService {
     public int addParkAdmin(ParkAdmin user) {
         return mapper.insertSelective(user);
     }
+
+    public ParkAdmin getParkAdminInfoById(int id) {
+        return mapper.selectByPrimaryKey(id);
+    }
 }

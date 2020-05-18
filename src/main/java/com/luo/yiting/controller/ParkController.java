@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import sun.lwawt.macosx.CSystemTray;
 
 import java.io.File;
 import java.io.IOException;
@@ -124,8 +123,9 @@ public class ParkController {
         return map;
     }
 
+    //添加停车场
     @RequestMapping(value = "/addParkingLot", method = RequestMethod.POST)
-    public Map addParkingLot(@RequestParam(value = "pics", required = false) MultipartFile[] pic,
+    public Map addParkingLot(@RequestParam(value = "pics", required = false) MultipartFile[] pics,
                              @RequestParam("address") String address,
                              @RequestParam("latitude") Double latitude,
                              @RequestParam("longitude") Double longitude,
@@ -133,12 +133,57 @@ public class ParkController {
                              @RequestParam("province") String province,
                              @RequestParam("city") String city,
                              @RequestParam(value = "description", required = false) String description,
-                             @RequestParam("freeDuration") String freeDuration,
-                             @RequestParam("cappedPrice") String cappedPrice,
-                             @RequestParam("total") String total) {
+                             @RequestParam("freeDuration") Float freeDuration,
+                             @RequestParam(value = "cappedPrice", required = false) Float cappedPrice,
+                             @RequestParam("total") Integer total,
+                             @RequestParam("name") String name,
+                             @RequestParam("number") String number) {
 
+        ParkingLot parkingLot = new ParkingLot();
+        String path = System.getProperty("user.dir") + "/src/main/resources/static/image/parkingLot";
+        String picUrl = "";
+        if (!StringUtils.isEmpty(pics)) {
+            for (int i = 0; i < pics.length; i++) {
+                String picName = pics[i].getOriginalFilename();
+                String suffixName = picName.substring(picName.lastIndexOf("."));
+                picName = UUID.randomUUID().toString().replace("-", "") + suffixName;
+                File file = new File(path, picName);
+                if (!file.getParentFile().exists()) {
+                    file.getParentFile().mkdirs();
+                }
+                picUrl += "/image/parkingLot/" + picName + ",";
+                //将上传文件保存到目标文件当中
+                try {
+                    pics[i].transferTo(new File(path + File.separator + picName));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            picUrl = picUrl.substring(0, picUrl.length() - 1);
+        }
+        if (!picUrl.equals("")) {
+            parkingLot.setPic(picUrl);
+        }
+        if (!StringUtils.isEmpty(description)) {
+            parkingLot.setDescription(description);
+        }
+
+        parkingLot.setFreeDuration(freeDuration);
+        parkingLot.setPrice(price);
+        parkingLot.setTotal(total);
+        parkingLot.setName(name);
+        parkingLot.setProvince(province);
+        parkingLot.setCity(city);
+        parkingLot.setCurrent(total);
+        parkingLot.setAddress(address);
+        parkingLot.setLatitude(latitude);
+        parkingLot.setLongitude(longitude);
+        parkingLot.setNumber(number);
+        parkingLot.setCappedPrice(cappedPrice);
 
         Map<String, Object> map = new HashMap<>();
+        int res = parkService.addParkingLot(parkingLot);
+        map.put("code", res == 0 ? 500 : 200);
         return map;
     }
 
@@ -227,8 +272,8 @@ public class ParkController {
 
     //根据用户id查询共享车位信息
     @RequestMapping("/getUserShareParks")
-    public Map getUserSharesByserId(@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
-                            @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize, Integer userId) {
+    public Map getUserSharesByUserId(@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
+                                    @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize, Integer userId) {
         PageHelper.startPage(pageNo, pageSize);
 
         List<UserSharePark> shareParks = parkService.getUserShare(userId);

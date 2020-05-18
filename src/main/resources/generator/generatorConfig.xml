@@ -42,8 +42,9 @@
 <!--        <table tableName="park_order" domainObjectName="ParkOrder"></table>-->
 <!--        <table tableName="share_order" domainObjectName="ShareOrder"></table>-->
 <!--        <table tableName="user_share_park" domainObjectName="UserSharePark"></table>-->
-        <table tableName="car" domainObjectName="Car"></table>
+<!--        <table tableName="car" domainObjectName="Car"></table>-->
 <!--        <table tableName="parking_lot" domainObjectName="ParkingLot"></table>-->
+        <table tableName="share_order_extra" domainObjectName="ShareOrderExtra"></table>
 <!--        <table tableName="information" domainObjectName="Information">-->
 <!--            <columnOverride column="description" jdbcType="VARCHAR" />-->
 <!--        </table>-->

@@ -25,6 +25,13 @@ public class ParkService {
         return userShareParkMapper.insertSelective(userSharePark);
     }
 
+    //添加停车场
+    @Transactional(rollbackFor = Exception.class)
+    public int addParkingLot(ParkingLot parkingLot) {
+        return parkingLotMapper.insertSelective(parkingLot);
+    }
+
+
     // 获取指定经纬度方圆几公里内的用户共享停车位 并且审核要通过的 且时间还没到的
     public List<UserSharePark> getAllShareInfo(double latitude, double longitude) {
         double[] res = Util.compute(latitude, longitude, 20000);

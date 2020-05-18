@@ -120,6 +120,8 @@ public class OderController {
     public Map tuiding(Integer orderId, Integer userId) {
         // 先检查是否当前时间在预定开始前一个小时
 
+        //检查订单状态，如果是正在进行中的订单无法退订
+
         boolean res = orderService.tuiding(orderId, userId);
         Map<String, Object> map = new HashMap<>();
         map.put("code", res ? 200 : 500);
